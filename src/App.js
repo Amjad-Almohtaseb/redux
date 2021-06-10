@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import TripList from "./components/TripList";
+import TripDetail from "./components/TripDetail";
+import { useState } from "react";
+import "./App.css";
+import trips from "./trips";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [trip, setTrip] = useState(null);
+  const [_trips, setTrips] = useState(trips);
+
+  const setView = () => {
+    if (trip) return <TripDetail trip={trip} setTrip={setTrip} />;
+    else return <TripList setTrip={setTrip} trips={_trips} />;
+  };
+  return setView();
 }
 
 export default App;
